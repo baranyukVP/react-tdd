@@ -1,30 +1,23 @@
 import { Heading } from "./Heading";
 import Counter from "./Counter";
-import { Component } from "react";
+import { FC, useState } from "react";
 
 const initialState = { count: 0 };
-export type TCounterState = Readonly<typeof initialState>;
 
-class App extends Component<object, TCounterState> {
-  readonly state: TCounterState = initialState;
+const App: FC = () => {
+  const [count, setCount] = useState<number>(initialState.count);
 
-  increment = (isShift: boolean) => {
+  const increment = (isShift: boolean) => {
     const inc: number = isShift ? 10 : 1;
-    this.setState({ count: this.state.count + inc });
+    setCount((count) => count + inc);
   };
 
-  render() {
-    return (
-      <div>
-        <Heading />
-        <Counter
-          label="Current"
-          count={this.state.count}
-          onCounterIncrease={this.increment}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Heading />
+      <Counter label="Current" count={count} onCounterIncrease={increment} />
+    </div>
+  );
+};
 
 export default App;
