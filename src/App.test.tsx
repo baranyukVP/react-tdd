@@ -1,9 +1,28 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { fireEvent, render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("render hello react", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
+  const linkElement = screen.getByText(/hello react/i);
   expect(linkElement).toBeInTheDocument();
+  const label = screen.getByLabelText("Current");
+  expect(label).toBeInTheDocument();
+  const counter = screen.getByRole("counter");
+  expect(counter).toHaveTextContent("0");
+});
+
+test("should increment the count by one", () => {
+  render(<App />);
+  const counter = screen.getByRole("counter");
+  expect(counter).toHaveTextContent("0");
+  fireEvent.click(counter);
+  expect(counter).toHaveTextContent("1");
+});
+
+test("should increment the count by ten", () => {
+  render(<App />);
+  const counter = screen.getByRole("counter");
+  expect(counter).toHaveTextContent("0");
+  fireEvent.click(counter, { shiftKey: true });
+  expect(counter).toHaveTextContent("10");
 });
