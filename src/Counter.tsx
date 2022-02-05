@@ -17,8 +17,8 @@ export const Counter: FC<TCounterProps> = ({
 
   return (
     <div>
-      <label htmlFor="counter">{label}</label>
-      <span id="counter" role="counter" onClick={handleClick}>
+      <span>{label}</span>
+      <span id="counter" data-testid="counter" onClick={handleClick}>
         {count}
       </span>
     </div>
