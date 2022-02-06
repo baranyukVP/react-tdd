@@ -12,10 +12,20 @@ const App: FC = () => {
     setCount((count) => count + inc);
   };
 
+  const decrement = (isShift: boolean) => {
+    const inc: number = isShift ? 10 : 1;
+    setCount((count) => count - inc);
+  };
+
   return (
     <div>
       <Heading />
-      <Counter label="Current" count={count} onCounterIncrease={increment} />
+      <Counter
+        label="Current"
+        count={count}
+        onCounterIncrease={increment}
+        onCounterDecrease={decrement}
+      />
     </div>
   );
 };

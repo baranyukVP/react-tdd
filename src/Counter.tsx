@@ -4,23 +4,35 @@ export type TCounterProps = {
   label?: string;
   count: number;
   onCounterIncrease: (isShift: boolean) => void;
+  onCounterDecrease: (isShift: boolean) => void;
 };
 
 export const Counter: FC<TCounterProps> = ({
   label = "Count",
   count,
   onCounterIncrease,
+  onCounterDecrease,
 }) => {
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
+  const handleIncrementClick = (event: MouseEvent<HTMLElement>) => {
     onCounterIncrease(event.shiftKey);
+  }
+
+  const handleDecrementClick = (event: MouseEvent<HTMLElement>) => {
+    onCounterDecrease(event.shiftKey);
   }
 
   return (
     <div>
       <span>{label}</span>
-      <span id="counter" data-testid="counter" onClick={handleClick}>
+      <button onClick={handleIncrementClick} data-testid="increment">
+        +
+      </button>
+      <span id="counter" data-testid="counter">
         {count}
       </span>
+      <button onClick={handleDecrementClick} data-testid="decrement">
+        -
+      </button>
     </div>
   );
 };

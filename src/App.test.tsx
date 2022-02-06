@@ -14,15 +14,17 @@ test("render hello react", () => {
 test("should increment the count by one", () => {
   render(<App />);
   const counter = screen.getByTestId("counter");
+  const incrementer = screen.getByTestId("increment");
   expect(counter).toHaveTextContent("0");
-  fireEvent.click(counter);
+  fireEvent.click(incrementer);
   expect(counter).toHaveTextContent("1");
 });
 
 test("should increment the count by ten", () => {
   render(<App />);
   const counter = screen.getByTestId("counter");
+  const incrementer = screen.getByTestId("increment");
   expect(counter).toHaveTextContent("0");
-  fireEvent.click(counter, { shiftKey: true });
+  fireEvent.click(incrementer, { shiftKey: true });
   expect(counter).toHaveTextContent("10");
 });
